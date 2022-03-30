@@ -1,6 +1,8 @@
 # CodingTest
 Python - 이것이 코딩 테스트다 with Python   
   
+Library - 함수 라이브러리 모음    
+  
 라이브러리 함수 작성 예시  
   
 ```
