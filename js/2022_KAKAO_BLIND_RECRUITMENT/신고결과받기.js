@@ -1,4 +1,5 @@
-function solution(id_list, reports, k) {
+function solution(id_list, report, k) {
+    report = [...new Set(report)];
     let answer = new Array(id_list.length);
     let mail_count = new Array(id_list.length);
     let user_count = new Array(id_list.length);
@@ -7,8 +8,8 @@ function solution(id_list, reports, k) {
         mail_count[i] = 0;
         user_count[i] = '';
     }
-    for (const report of reports){
-        x = report.split(" ");
+    for (const r of report){
+        x = r.split(" ");
         for (let i in id_list){
             if(id_list[i] == x[1]){
                 mail_count[i]++;
@@ -33,8 +34,12 @@ function solution(id_list, reports, k) {
     return answer;
 }
 
-let id_list = ["muzi", "frodo", "apeach", "neo"];
-let report = ["muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi"];
+// let id_list = ["muzi", "frodo", "apeach", "neo"];
+// let report = ["muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi"];
+
+let id_list = ["con", "ryan"];
+let report = ["ryan con", "ryan con", "ryan con", "ryan con"];
+
 let k = 2;
 
 let result = solution(id_list,report,k);
