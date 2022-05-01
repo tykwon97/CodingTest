@@ -39,6 +39,25 @@ function solution(id_list, report, k) {
     return answer;
 }
 
+function good_solution(id_list, report, k) {
+    let reports = [...new Set(report)].map(a=>{return a.split(' ')});
+    
+    let counts = new Map();
+    for (const bad of reports){
+        counts.set(bad[1],counts.get(bad[1])+1||1) //undefined인 경우 대비 해서 || 사용
+    }
+    
+    let good = new Map();
+    for(const report of reports){
+        if(counts.get(report[1])>=k){
+            good.set(report[0],good.get(report[0])+1||1) //undefined인 경우 대비 해서 || 사용
+        }
+    }
+
+    let answer = id_list.map(a=>good.get(a)||0)
+    return answer;
+}
+
 let id_list = ["muzi", "frodo", "apeach", "neo"];
 let report = ["muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi","muzi apeach","apeach muzi","apeach neo","frodo apeach"];
 
@@ -47,5 +66,5 @@ let report = ["muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi","
 
 let k = 1;
 
-let result = solution(id_list,report,k);
+let result = good_solution(id_list,report,k);
 console.log(result);
