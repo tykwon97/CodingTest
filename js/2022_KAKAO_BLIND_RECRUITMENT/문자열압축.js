@@ -2,8 +2,12 @@ function solution(s) {
     let answer = 1001;
     let count;
     let check; //자리수가 바뀌는 경우
+
     let prev_prev_str = ''
     let prev_str = '';
+
+    if(s.length == 0) return 0;
+    if(s.length == 1) return 1;
 
     for(let i=1; i<s.length; i++){ //1부터 문자열길이까지
         count = 0;
@@ -11,8 +15,8 @@ function solution(s) {
         for(let j=0; j<s.length; j = j+i){
             let str = s.substr(j,i);
             
-            console.log('i : ',i,' j : ',j,' str : ',str, ' check : ',check)
-            console.log(prev_prev_str,prev_str)
+            // console.log('i : ',i,' j : ',j,' str : ',str, ' check : ',check)
+            // console.log(prev_prev_str,prev_str)
 
             if(prev_str == str){
                 check += 1;
@@ -41,12 +45,12 @@ function solution(s) {
             
             prev_prev_str = prev_str;
             prev_str = str;
-            console.log('count : ',count)
+            // console.log('count : ',count)
         }
         if(answer > count){
             answer = count;
         }
-        console.log(count,'-----------------------------------------');
+        // console.log(count,'-----------------------------------------');
     }
     return answer;
 }
@@ -57,7 +61,7 @@ function solution(s) {
 // s = "abcabcabcabcdededededede"; //14
 // s = "xababcdcdababcdcd"; //17
 
-s = "aaaaaaaaaabbbbbbbbbbaaaaaaaaaabbbbbbbbbbaaaaaaaaaabbbbbbbbbbaaaaaaaaaabbbbbbbbbbaaaaaaaaaabbbbbbbbbbaaaaaaaaaabbbbbbbbbbaaaaaaaaaabbbbbbbbbbaaaaaaaaaabbbbbbbbbbaaaaaaaaaabbbbbbbbbbaaaaaaaaaabbbbbbbbbb"
+ s = "a";
 
 let result = solution(s);
 console.log(result);
