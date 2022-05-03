@@ -65,19 +65,21 @@ const good_solution = s => {
 };
   
 const compress = (s, n) => {
-    const make = ([a, l, c]) => `${a}${c > 1 ? c : ''}${l}`;
+    const make = ([a, l, c]) => {
+        console.log('[',a,',',l,',',c,']')
+        return `${a}${c > 1 ? c : ''}${l}`;
+    }
     // a는 압축한 결과, l은 내가 짠 코드에서 tempStr, c는 count
-    let x = make(
+    return make(
         chunk(s, n).reduce( // 조각 낸 배열이 reduce된다. reduce(누적값, 현재값) 
             ( [a, l, c], e) => 
-              // [a, l, c]에 해당
+              // [a,l,c] : [  ,  , 0 ]
+              // e : chunk(s,n)의 값이 하나씩 들어감
               e === l ? [a, l, c + 1] : [ make([a, l, c]) , e, 1 ] , // [a는 make([a,l,c], l은 e, c = 1 ]
               // e에 해당
-              ['', '', 0]   
+              ['', '', 0] 
           )
     );
-    // console.log(x)
-    return x;
 };
   
 // 문자열을 i를 기준으로 조각 내는 함수
