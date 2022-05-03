@@ -66,7 +66,7 @@ const good_solution = s => {
   
 const compress = (s, n) => {
     const make = ([a, l, c]) => {
-        console.log('[',a,',',l,',',c,']')
+        // console.log('[',a,',',l,',',c,']')
         return `${a}${c > 1 ? c : ''}${l}`;
     }
     // a는 압축한 결과, l은 내가 짠 코드에서 tempStr, c는 count
