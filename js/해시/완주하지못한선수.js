@@ -69,6 +69,20 @@ function hash2_solution(participants, completions) {
     return answer;
 }
 
+// 다른 사람 코드 (너무 짧아서 충격적이다)
+// let wow_solution=(_,$)=>_.find(_=>!$[_]--,$.map(_=>$[_]=($[_]|0)+1))
+let wow_solution = (_,$) =>  _.find( 
+    
+    // 첫 번째 인자
+    _ => !$[_]-- ,
+    // 두 번째 인자
+    $.map( _ => $[_]=($[_]|0)+1 )
+
+    )
+
+
+
+
 a = ["leo", "kiki", "eden"];
 b = ["eden", "kiki"]; // "leo"
 
@@ -92,3 +106,38 @@ console.log(result);
 
 result = hash2_solution(a,b);
 console.log(result);
+
+result = wow_solution(a,b);
+console.log(result);
+
+
+/*
+// 추가 코드들
+function solution(participant, completion) {
+    const map = new Map();
+
+    for(let i = 0; i < participant.length; i++) {
+        let a = participant[i], 
+            b = completion[i];
+
+        map.set(a, (map.get(a) || 0) + 1);
+        map.set(b, (map.get(b) || 0) - 1);
+    }
+
+    for(let [k, v] of map) {
+        if(v > 0) return k;
+    }
+
+    return 'nothing';
+}
+
+function solution(participant, completion) {
+    var dic = completion.reduce((obj, t)=> (obj[t]= obj[t] ? obj[t]+1 : 1 , obj) ,{});
+    return participant.find(t=> {
+        if(dic[t])
+            dic[t] = dic[t]-1;
+        else 
+            return true;
+    });
+}
+*/
