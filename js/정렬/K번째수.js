@@ -3,8 +3,9 @@ function solution(array, commands) {
     commands.forEach((command) => {
         let [i,j,k] = command;
         // console.log(i,j,k);
-        let arr = array.slice(i-1,j);
-        arr = arr.sort();
+        let arr = array //체이닝 적용
+            .slice(i-1,j)
+            .sort();
         // console.log(arr);
         answer.push(arr[k-1]);
     })
