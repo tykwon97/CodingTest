@@ -1,6 +1,7 @@
 import sys
 sys.stdin = open('input.txt', 'rt')
 n, m = map(int, input().split())
+# 딕셔너리를 사용할 필요가 없었음
 arr = {}
 for i in range(n):
     for j in range(m):
