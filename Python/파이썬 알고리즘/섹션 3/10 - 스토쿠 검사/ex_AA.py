@@ -25,5 +25,8 @@ def check(a):
     return True
 
 
-n = int(input())
-a = [list(map(int, input().split())) for _ in range(n)]
+a = [list(map(int, input().split())) for _ in range(9)]
+if check(a):
+    print("YES")
+else:
+    print("NO")
