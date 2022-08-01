@@ -1,9 +1,9 @@
+package com.ssafy.pre;
 import java.util.Scanner;
 
 public class N1979_WhereTheWordEnter {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		Scanner sc = new Scanner(System.in);
 		int T;
 		T=sc.nextInt();

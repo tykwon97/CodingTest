@@ -28,32 +28,33 @@ public class N1244_Solution {
 
 			}else {
 				int j = 0;
-				int pivot = person[2]-'0';
+				int pivot = person[2]-'0'-1;
+				
 				while(true) {
 					if(pivot-1-j >= 0 && pivot+1+j < switchNum) {
 						if(switchArr[(pivot-1-j)*2] == switchArr[(pivot+1+j)*2]) {
-							if(switchArr[(pivot-1-j)*2] == '0')
+							if(switchArr[(pivot-1-j)*2] == '0') {
 								switchArr[(pivot-1-j)*2]++;
-							else
-								switchArr[(pivot-1-j)*2]--;
-							
-							if(switchArr[(pivot+1+j)*2] == '0')
 								switchArr[(pivot+1+j)*2]++;
-							else
+								
+							}else {
+								switchArr[(pivot-1-j)*2]--;
 								switchArr[(pivot+1+j)*2]--;
+							}
+								
+							
 						}else {
 							if(j == 0) {
 								if(switchArr[pivot*2] == '0')
 									switchArr[pivot*2]++;
 								else
 									switchArr[pivot*2]--;
-								break;
-							}else {
-								break;
 							}
+							break;
 							
 							
 						}
+						
 						j += 1;
 							
 						
@@ -62,11 +63,14 @@ public class N1244_Solution {
 							switchArr[pivot*2]++;
 						else
 							switchArr[pivot*2]--;
+						break;
 					}
 
 				}
 			}
 			System.out.println(switchArr);
 		}
+
+		System.out.println(switchArr);
 	}
 }

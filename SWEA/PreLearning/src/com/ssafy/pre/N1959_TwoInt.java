@@ -1,14 +1,17 @@
-import java.util.Arrays;
+package com.ssafy.pre;
+
 import java.util.Scanner;
+public class N1959_TwoInt {
 
-public class N1959_TwoStringOfNumbers {
 
-	public static void main(String[] args) {
+	public static void main(String args[]) throws Exception
+	{
 		Scanner input = new Scanner(System.in);
-		int num = input.nextInt();
-		
-		for(int i=0; i<num;i++) {
-			int N = input.nextInt();
+		int T;
+		T=input.nextInt();
+		for(int test_case = 1; test_case <= T; test_case++)
+		{
+            int N = input.nextInt();
 			int M = input.nextInt();
 			int[] N_arr = new int[N];
 			int[] M_arr = new int[M];
@@ -51,8 +54,7 @@ public class N1959_TwoStringOfNumbers {
 				}
 			}
 			
-			System.out.println("#" + (i+1) + " " + maxValue);
-		}
+			System.out.println("#" + test_case + " " + maxValue);
+        }
 	}
-
 }
