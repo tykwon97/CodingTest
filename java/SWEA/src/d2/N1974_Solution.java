@@ -1,7 +1,7 @@
-package com.ssafy.pre;
+package d2;
 
 import java.util.Scanner;
-public class N1974_Sudoku {
+public class N1974_Solution {
 
 	public static void main(String args[]) throws Exception
 	{

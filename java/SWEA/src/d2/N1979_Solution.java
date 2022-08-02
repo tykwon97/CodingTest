@@ -1,7 +1,7 @@
-package com.ssafy.pre;
+package d2;
 import java.util.Scanner;
 
-public class N1979_WhereTheWordEnter {
+public class N1979_Solution {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);

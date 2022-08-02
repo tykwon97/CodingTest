@@ -1,9 +1,9 @@
-package com.ssafy.pre;
+package d2;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class N1961_NumberArrayRotation {
+public class N1961_Solution {
 
 	public static void main(String args[]) throws Exception
 	{
