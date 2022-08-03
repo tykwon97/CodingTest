@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 public class N2231_Solution {
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		
+
 		int n = Integer.parseInt(in.readLine());
 		int index = 0;
 		
@@ -24,8 +24,7 @@ public class N2231_Solution {
 				break;
 			}
 		}
-		
+
 		System.out.println(index);
-		
 	}
 }
