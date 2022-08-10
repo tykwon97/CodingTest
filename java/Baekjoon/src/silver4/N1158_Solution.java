@@ -3,6 +3,7 @@ package silver4;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -20,7 +21,7 @@ public class N1158_Solution {
 		int n = Integer.parseInt(st.nextToken());
 		int k = Integer.parseInt(st.nextToken());
 		
-		Queue<Integer> queue = new LinkedList<>();
+		Queue<Integer> queue = new ArrayDeque<Integer>();
 		for (int i = 1; i <= n; i++) {
 			queue.offer(i);
 		}
