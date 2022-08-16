@@ -25,7 +25,7 @@ public class N1074_Solution {
 		while(n != 0) {
 			
 			int x = (int) (Math.pow(2, n))/2;
-			System.out.println("r : "+r+" c: "+c+" x : "+x);
+//			System.out.println("r : "+r+" c: "+c+" x : "+x);
 			if(x-1 <= r) {
 				if(x-1 <= c) {
 					count += x*x;

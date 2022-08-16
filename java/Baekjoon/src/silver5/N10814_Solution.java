@@ -14,7 +14,7 @@ public class N10814_Solution {
 	public static class Person{
 		int age;
 		String name;
-		Person(int age, String name){
+		Person(int age, String name){  
 			this.age = age;
 			this.name = name;
 		}
@@ -45,7 +45,7 @@ public class N10814_Solution {
 		});
 		
 		for(Person p : list) {
-			System.out.println(p.age+" "+p.name);
+			sb.append(p.age).append(" ").append(p.name).append("\n");
 		}
 
 		System.out.println(sb);

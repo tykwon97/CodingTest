@@ -4,86 +4,63 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.StringTokenizer;
 
 public class N7568_Solution {
+	
+	/*
+	 * 몸무게와 키 순으로 Comparator를 이용해 정렬 후 문제를 풀 생각이었지만
+	 * 정렬 기준이 정확하게 구현할 수 없었고 단순히 본인 보다 덩치가 큰 사람의 수를 더하는 문제였다.
+	 * 순위가 아닌 점수제에 가깝다고 생각한다.
+	 */
+	
+	public static class Person {
+		int kg;
+		int height;
+		
+		Person(int kg, int height, int index){
+			this.kg = kg;
+			this.height = height;
+		}
+		
+	}
+	
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder sb = new StringBuilder();
 		
-		// 이게 맞나 싶어...
-		
 		int num = Integer.parseInt(in.readLine());
 		
-		int[] rank = new int[num];
-		
-		int[] arr = new int[num*2];
+		Person[] list = new Person[num];
 		
 		for (int i = 0; i < num; i++) {
 			StringTokenizer st = new StringTokenizer(in.readLine()," ");
-			int x = Integer.parseInt(st.nextToken());
-			int y = Integer.parseInt(st.nextToken());
-			arr[i*2] = x;
-			arr[i*2+1] = y;
+			int kg = Integer.parseInt(st.nextToken());
+			int height = Integer.parseInt(st.nextToken());
+			list[i] = new Person(kg,height,i);
+			
 		}
 		
-		for(int i = 0; i < num; i++) {
-			int x1 = arr[i*2];
-			int y1 = arr[i*2+1];
-			for (int j = 0; j < num; j++) {
-				if(i != j) {
-					int x2 = arr[j*2];
-					int y2 = arr[j*2+1];
-					if(x1 > x2) {
-						if(y1>y2) {
-							rank[i] += 1;
-						}
-					}else {
-						if(y2>y1) {
-							rank[j] += 1; 
-						}
-					}
-				}
-			}
+		int result[] = new int[num];
+		for (int i = 0; i < num; i++) {
+			result[i] = 1;
 		}
-			
-
 		
-		
-		boolean[] isSelected = new boolean[num+1];
-		for (int i = num; i >= 1; i--) {
-			
-			int minValue = Integer.MAX_VALUE;
-			int minCount = 0;
-			for (int j = 0; j < num; j++) {
-				if(!isSelected[j]) {
-					if(minValue == rank[j])
-						minCount++;
-					else if(minValue > rank[j]) {
-						minValue = rank[j];
-						minCount = 0;
-					}
-				}
-			}
-			
-			i = i-minCount;
-			
-			for (int j = 0; j < num; j++) {
-				if(rank[j] == minValue) {
-					if(!isSelected[j]) {
-						rank[j] = i;
-						isSelected[j] = true;
-					}
+		for (int i = 0; i < result.length; i++) {
+			for (int j = 0; j < result.length; j++) {
+				if(list[i].kg < list[j].kg && list[i].height < list[j].height) {
+					result[i]++;
 				}
 			}
 		}
 		
-		for(int x : rank) {
+		
+		for(int x : result) {
 			sb.append(x).append(" ");
 		}
-		
 		
 		System.out.println(sb);
 	}
