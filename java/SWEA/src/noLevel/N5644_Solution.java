@@ -15,7 +15,6 @@ public class N5644_Solution {
 		int testCase = Integer.parseInt(in.readLine());
 
 		for(int tc=1; tc<=testCase; tc++) {
-			System.out.println();
 			st = new StringTokenizer(in.readLine(), " ");
 
 			int[][] map = new int[10][10];
@@ -46,9 +45,6 @@ public class N5644_Solution {
 				st = new StringTokenizer(in.readLine(), " ");
 				int y = Integer.parseInt(st.nextToken())-1; //x,y 반대로 들어옴
 				int x = Integer.parseInt(st.nextToken())-1;
-
-				map[x][y] = -1; // BC위치
-
 				int c = Integer.parseInt(st.nextToken()); // Coverage 
 				int p = Integer.parseInt(st.nextToken()); // Performance
 
@@ -58,7 +54,6 @@ public class N5644_Solution {
 					for (int k = y-c; k <= y+c; k++) {
 						if(j>= 0 && j<10 && k>=0 && k<10) {// && (j!=x || k!=y)) {
 							if(Math.abs(x-j) + Math.abs(y-k) <= c) {
-
 								if(map[j][k] == 0)
 									map[j][k] = p;
 								else { //겹치는 경우
@@ -83,9 +78,7 @@ public class N5644_Solution {
 			int[] dx = {0,-1,0,1,0};
 			int[] dy = {0,0,1,0,-1};
 
-			int totalA = 0;
-			int totalB = 0;
-			int total = 0;
+			int totalA = 0, totalB = 0, total = 0;
 
 			if(map[aX][aY] != -2) {
 				totalA += map[aX][aY];
@@ -119,15 +112,15 @@ public class N5644_Solution {
 				bX += dx[bMove[i]];
 				bY += dy[bMove[i]];
 
-				if(!flag[aX][aY].equals("") && flag[aX][aY].equals(flag[bX][bY]) && flag[aX][aY].length() == 1) {
-					if(map[aX][aY] != -2) {
+				if(!flag[aX][aY].equals("") && flag[aX][aY].length() == 1 && flag[aX][aY].equals(flag[bX][bY])) {
+					if(map[aX][aY] != -1) {
 						totalA += map[aX][aY]/2;
 					}else {
 						int n = Integer.parseInt(flag[aX][aY]);
 						totalA += coverage[n]/2;
 					}
 
-					if(map[bX][bY] != -2) {
+					if(map[bX][bY] != -1) {
 						totalB += map[bX][bY]/2;
 					}else {
 						int n = Integer.parseInt(flag[bX][bY]);
@@ -138,7 +131,7 @@ public class N5644_Solution {
 					if(flag[aX][aY].equals("") || flag[bX][bY].equals("")) {			
 						if(!flag[aX][aY].equals("")) {
 							if(flag[aX][aY].length() == 1) {
-								if(map[aX][aY] != -2) {
+								if(map[aX][aY] != -1) {
 									totalA += map[aX][aY];
 								}else {
 									int n = Integer.parseInt(flag[aX][aY]);
@@ -157,7 +150,7 @@ public class N5644_Solution {
 						}
 						if(!flag[bX][bY].equals("")) {
 							if(flag[bX][bY].length() == 1) {
-								if(map[bX][bY] != -2) {
+								if(map[bX][bY] != -1) {
 									totalB += map[bX][bY];
 								}else {
 									int n = Integer.parseInt(flag[bX][bY]);
@@ -177,9 +170,8 @@ public class N5644_Solution {
 						continue;
 					}
 					if(flag[aX][aY].length() != 1 || flag[bX][bY].length() != 1) {
-
 						if(flag[aX][aY].length() == 1 && flag[bX][bY].length() != 1) {
-							if(map[aX][aY] != -2) {
+							if(map[aX][aY] != -1) {
 								totalA += map[aX][aY];
 							}else {
 								int n = Integer.parseInt(flag[aX][aY]);
@@ -196,7 +188,7 @@ public class N5644_Solution {
 							}
 							totalB += max; 
 						}else if(flag[aX][aY].length() != 1 && flag[bX][bY].length() == 1) {
-							if(map[bX][bY] != -2) {
+							if(map[bX][bY] != -1) {
 								totalB += map[bX][bY];
 							}else {
 								int n = Integer.parseInt(flag[bX][bY]);
@@ -212,7 +204,8 @@ public class N5644_Solution {
 								}
 							}
 							totalA += max; 
-						}else if(flag[aX][aY].length() != 1 && flag[bX][bY].length() != 1) {
+							
+						}else{
 							String[] aa = flag[aX][aY].split(" ");
 							int maxA1 = Integer.MIN_VALUE;
 							int maxA2 = Integer.MIN_VALUE;
@@ -264,7 +257,7 @@ public class N5644_Solution {
 						}
 
 					}else {
-						if(map[aX][aY] != -2) {
+						if(map[aX][aY] != -2 && map[aX][aY] != -1) {
 							totalA += map[aX][aY];
 						}else {
 							String[] str = flag[aX][aY].split(" ");
@@ -277,7 +270,7 @@ public class N5644_Solution {
 							totalA += max; 
 						}
 
-						if(map[bX][bY] != -2) {
+						if(map[bX][bY] != -2 && map[bX][bY] != -1) {
 							totalB += map[bX][bY];
 						}else {
 							String[] str = flag[bX][bY].split(" ");
@@ -289,6 +282,29 @@ public class N5644_Solution {
 							}
 							totalB += max; 
 						}
+					}
+				}else {
+					if(aX == bX && aY == bY && flag[aX][aY].length() > 1) {
+						String[] aa = flag[aX][aY].split(" ");
+						int maxA1 = Integer.MIN_VALUE;
+						int maxA2 = Integer.MIN_VALUE;
+						int aIndex1 = Integer.parseInt(aa[0]);
+						int aIndex2 = Integer.parseInt(aa[0]);
+						for(int j=0; j<aa.length; j++) {
+							int n = Integer.parseInt(aa[j]);
+							if(maxA1<coverage[n]) {
+								maxA2 = maxA1;
+								aIndex2 = aIndex1;
+								maxA1 = coverage[n];
+								aIndex1 = n;
+							}else if(maxA2 < coverage[n]) {
+								maxA2 = coverage[n];
+								aIndex2 = n;
+							}
+						}
+						totalA += coverage[aIndex1]; 
+						totalB += coverage[aIndex2];
+						continue;
 					}
 				}
 			}
