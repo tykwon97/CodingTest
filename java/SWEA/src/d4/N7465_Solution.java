@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class N7465_Solution {
-
+	
 	public static int[] p;
 
 	public static void main(String[] args) throws IOException {
