@@ -68,7 +68,6 @@ public class N16236_Solution {
 
 //				System.out.println("x : "+x+" y : "+y);
 
-
 				for (int i = 0; i < 4; i++) {
 					int nextX = x+dx[i];
 					int nextY = y+dy[i];
@@ -77,19 +76,20 @@ public class N16236_Solution {
 						System.out.println(time);
 						return;
 					}
-					System.out.println("nextX : "+nextX+"nextY : "+nextY);
+//					System.out.println("nextX : "+nextX+" nextY : "+nextY);
 					if(nextX<0 || nextX>=N || nextY <0 || nextY>=N)
 						break;
 
-					isSelected[nextX][nextY] = true;
 					if(!isSelected[nextX][nextY]) {
+
+						isSelected[nextX][nextY] = true;
 						if(Integer.parseInt(map[nextX][nextY]) < size) {
 							if(!map[nextX][nextY].equals("0") && !map[nextX][nextY].equals("9")) {
 //								System.out.println(map[nextX][nextY] +" : "+ size);
 								map[nextX][nextY] = "0";
 								
 								System.out.println("nextX : "+nextX+" nextY : "+nextY+" size : "+size+" eatFish : "+eatFish+" time : "+time);
-								queue.clear();
+//								queue.clear();
 								if(eatFish+1 == size) {
 									queue.add(new int[] {nextX, nextY, size+1,0,time+1});
 								}else {
@@ -97,7 +97,7 @@ public class N16236_Solution {
 									queue.add(new int[] {nextX, nextY, size, eatFish+1 ,time+1});
 								}
 								sharkCount --;
-								break;
+								continue;
 							}else if(map[nextX][nextY].equals("9")){
 								continue;
 							}else {
