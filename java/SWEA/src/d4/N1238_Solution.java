@@ -3,7 +3,6 @@ package d4;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class N1238_Solution {
@@ -11,52 +10,27 @@ public class N1238_Solution {
 	public static void main(String[] args) throws IOException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder sb = new StringBuilder();
-
-
+		StringTokenizer st;
 		for(int tc=1; tc<=10; tc++) {
-			int n = Integer.parseInt(in.readLine());
-			char[] arr = in.readLine().toCharArray();
-			int flag = 1;
+			st = new StringTokenizer(in.readLine(), " ");
+			int n = Integer.parseInt(st.nextToken());
+			int start = Integer.parseInt(st.nextToken());
 
-			Stack<Character> stack = new Stack<>();
-
-			for (int i = 0; i < n; i++) {
-				switch(arr[i]+"") {
-				case "(" :
-				case "[" :
-				case "{" :
-				case "<" :
-					stack.push(arr[i]);
-					break;
-
-				case ")" :
-					char x1 = stack.pop();
-					if(x1 != '(')
-						flag = 0;
-					break;
-				case "]" :
-					char x2 = stack.pop();
-					if(x2 != '[')
-						flag = 0;
-					break;
-				case "}" :
-					char x3 = stack.pop();
-					if(x3 != '{')
-						flag = 0;
-					break;
-				case ">" :
-					char x4 = stack.pop();
-					if(x4 != '<')
-						flag = 0;
-					break;
-
-				}
-				if(flag == 0)
-					break;
+			
+			st = new StringTokenizer(in.readLine(), " ");
+			for (int i = 0; i < n/2; i++) {
+				int from = Integer.parseInt(st.nextToken());
+				int to = Integer.parseInt(st.nextToken());
 			}
-			sb.append("#").append(tc).append(" ").append(flag).append("\n");
+
+
+			
+
+			sb.append("#").append(tc).append(" ").append("").append("\n");
 		}
 
 		System.out.println(sb);
 	}
+
+	
 }
