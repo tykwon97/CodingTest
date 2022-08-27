@@ -10,7 +10,8 @@ import java.util.StringTokenizer;
 public class N4485_Solution {
 	
 	/*
-	 * 람다식을 이욯애 비교하면 느려요....ㅜ
+	 * 람다식을 이용해 비교하면 느려요....ㅜ
+	 * queue.add보다 queue.offer가 조금 더 빠르네..
 	 */
 	
 	public static int N;
