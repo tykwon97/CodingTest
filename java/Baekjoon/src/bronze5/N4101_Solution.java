@@ -1,26 +1,14 @@
 package bronze5;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class N4101_Solution {
-	public static void main(String[] args) throws IOException {
-		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st;
-		
-		while (true) {
-			st = new StringTokenizer(in.readLine()," ");
-			int a = Integer.parseInt(st.nextToken());
-			int b = Integer.parseInt(st.nextToken());
-			if(a == b && a == 0)
-				break;
-			if(a>b)
-				System.out.println("Yes");
-			else
-				System.out.println("No");
-		}
+	public static void main(String[] args) {
+		Date date = new Date();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
+		String newDate = simpleDateFormat.format(date); 
+		System.out.println(newDate);
 		
 	}
 }
