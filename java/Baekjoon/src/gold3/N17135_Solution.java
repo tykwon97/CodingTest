@@ -4,10 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
@@ -24,7 +21,6 @@ public class N17135_Solution {
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		StringBuilder sb = new StringBuilder();
 		StringTokenizer st;
 		
 		st = new StringTokenizer(in.readLine(), " ");
@@ -58,23 +54,16 @@ public class N17135_Solution {
 					map[i][j] = arr[i][j];
 				}
 			}
-//			System.out.println(Arrays.toString(loc));
 			int enemy = enemyNum;
 			int kill = 0;
 			while(enemy > 0) {
 				int nowKill = 0;
 				// 궁수 공격
-				
 				nowKill += attack(loc);
 				
 				enemy -= nowKill;
 				kill += nowKill;
-//				System.out.println("궁수 공격" + " kill :  "+ kill+ " enemy :  "+ enemy);
-//				for(int[] a : map) {
-//					for(int x : a) {
-//						System.out.print(x+" ");
-//					}System.out.println();
-//				}
+				
 				// 적 공격
 				for (int i = 0; i < M; i++) {
 					if(map[N-1][i] == 1)
@@ -89,12 +78,6 @@ public class N17135_Solution {
 					map[0][i] = 0;
 						
 				}
-//				System.out.println("적 공격" + " kill :  "+ kill+ " enemy :  "+ enemy);
-//				for(int[] a : map) {
-//					for(int x : a) {
-//						System.out.print(x+" ");
-//					}System.out.println();
-//				}
 			}
 			if(maxKill<kill)
 				maxKill = kill;
@@ -140,13 +123,7 @@ public class N17135_Solution {
 				count++;
 				map[ar[0]][ar[1]] = 0;
 			}
-//			System.out.println(Arrays.toString(ar));
 		}
-		
 		return count;
-		
-
-		
 	}
-
 }
