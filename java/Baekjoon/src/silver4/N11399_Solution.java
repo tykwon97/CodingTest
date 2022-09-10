@@ -23,10 +23,7 @@ public class N11399_Solution {
 		int total = 0;
 		while(!queue.isEmpty())
 			total += queue.poll()*n--;
-		
-		
 	
 		System.out.println(total);
-				
 	}
 }
