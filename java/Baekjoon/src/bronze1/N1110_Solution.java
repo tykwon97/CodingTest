@@ -3,11 +3,8 @@ package bronze1;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-<<<<<<< HEAD
-=======
 import java.util.StringTokenizer;
 
->>>>>>> 8a95528a284c4a8bd84083818f2da534425428c6
 public class N1110_Solution {
 
 	public static void main(String[] args) throws IOException {
@@ -16,13 +13,9 @@ public class N1110_Solution {
 		int count = 0;
 		int x = num;
 		do {
-<<<<<<< HEAD
-			
-=======
 			if(x<10) {
 				x *= 10;
 			}
->>>>>>> 8a95528a284c4a8bd84083818f2da534425428c6
 			int a = x/10%10;
 			int b = x%10;
 			x = b*10+(a+b)%10;
