@@ -3,8 +3,10 @@ package silver3;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class N1966_Solution {
@@ -21,17 +23,15 @@ public class N1966_Solution {
 			int n = Integer.parseInt(st.nextToken());
 			int m = Integer.parseInt(st.nextToken());
 
-			PriorityQueue<int[]> queue = new PriorityQueue<>((a,b)->a[0]-b[0]) ;
+			Queue<Integer> queue = new ArrayDeque<>();
 			
 			st = new StringTokenizer(in.readLine()," ");
 			for (int j = 0; j < n; j++) {
-				queue.offer(new int[] {Integer.parseInt(st.nextToken()), j});
+				queue.offer(Integer.parseInt(st.nextToken()));
 			}
 			
 			for (int j = 0; j < n; j++) {
-				int[] list = queue.poll();
-				sb.append(Arrays.toString(list)).append("\n");
-				int x = list[1];
+				int x = queue.poll();
 
 //				System.out.println(x);
 				if(m == x)
