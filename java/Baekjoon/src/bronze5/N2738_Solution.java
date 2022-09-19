@@ -25,7 +25,6 @@ public class N2738_Solution {
 		}
 		
 		for (int i = 0; i < N; i++) {
-			st = new StringTokenizer(in.readLine()," ");
 			for (int j = 0; j < M; j++) {
 				System.out.print(arr[i][j]+" ");				
 			}
