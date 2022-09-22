@@ -32,7 +32,7 @@ public class N4949_Solution {
 					}
 				}
 			}
-			if(flag)
+			if(flag && stack.isEmpty())
 				System.out.println("yes");
 			else
 				System.out.println("no");
