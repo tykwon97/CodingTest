@@ -3,11 +3,9 @@ package silver2;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class N10971_Solution {
-
 	public static void main(String[] args) throws IOException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		int V = Integer.parseInt(in.readLine());
@@ -20,7 +18,6 @@ public class N10971_Solution {
 				adjMatrix[i][j] = Integer.parseInt(st.nextToken());
 			}
 		}
-
-		
 	}
+
 }
