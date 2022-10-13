@@ -10,32 +10,31 @@ public class N2579_Main {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		
 		int N = Integer.parseInt(in.readLine());
-		int[] stairs = new int[N+2];
+		int[] stairs = new int[N+1];
 		for (int i = 1; i <= N; i++) {
 			stairs[i] = Integer.parseInt(in.readLine());
 		}
+		
 		if(N == 1) {
 			System.out.println(stairs[1]);
 			return;
 		}
-		int[] result = new int[N+2];
-		result[N+1] = 0;
-		result[N] = stairs[N];
-		result[N-1] = stairs[N-1]+stairs[N];
-		result[N-2] = Math.max(stairs[N]+stairs[N-1],stairs[N]+stairs[N-2]);
+		
+		int[][] result = new int[N+1][2];
+		result[1][0] = stairs[1];
+		result[1][1] = 0;
+		result[2][0] = stairs[1]+stairs[2];
+		result[2][1] = stairs[1];
 
-		for (int i = N-3; i >= 1; i--) {
-			int a = 0, b = 0, c = 0;
-			if(result[i+3] != result[i+4] || (result[i+3] == result[i+4] && stairs[i+3] > stairs[i+4]))
-				a = stairs[i]+stairs[i+1]+result[i+3];
-			if(result[i+2] != result[i+3] || (result[i+2] == result[i+3] && stairs[i+2] > stairs[i+3]))
-				b = stairs[i]+result[i+2];
-			c = result[i+1];
-			result[i] = Math.max(a, b);	
-			result[i] = Math.max(result[i], c);	
+		for (int i = 3; i <= N; i++) {
+			int a = stairs[i]+stairs[i-1]+result[i-2][1];
+			int b = stairs[i]+result[i-1][1];
+			int c = result[i-1][0];
+			result[i][0] = Math.max(a, b);	
+			result[i][1] = c;	
 		}
-//		System.out.println(Arrays.toString(result));
-		Arrays.sort(result);
-		System.out.println(result[N+1]);
+
+		
+		System.out.println(result[N][0]);
 	}
 }
