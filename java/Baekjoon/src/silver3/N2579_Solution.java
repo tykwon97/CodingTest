@@ -23,7 +23,7 @@ public class N2579_Solution {
 		result[N-2] = Math.max(result[N-2],stairs[N]+stairs[N-2]);
 		
 		for (int i = N-3; i >= 1; i--) {
-			result[i] = Math.max(stairs[i+1]+result[i+2], stairs[i]+stairs[i+1]-result[i+3]);				
+			result[i] = Math.max(stairs[i]+stairs[i+2]+result[i+3], stairs[i]+stairs[i+1]+result[i+3]);				
 		}
 		System.out.println(Arrays.toString(result));
 		Arrays.sort(result);

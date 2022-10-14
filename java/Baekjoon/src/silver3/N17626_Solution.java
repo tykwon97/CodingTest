@@ -30,7 +30,7 @@ public class N17626_Solution {
 					int len = (i+1)/2;
 					for (int j = len; j <= i-1; j++) {
 						int value = lagrange[j] + lagrange[i-j];
-						System.out.println("i : "+i+" value : "+value+ " j : "+j+ " i-j : "+(i-j));
+//						System.out.println("i : "+i+" value : "+value+ " j : "+j+ " i-j : "+(i-j));
 						if(temp > value) {
 							temp = value;
 							if(temp == 2) // 가장 좋은 경우 일 때 바로 종료
@@ -41,7 +41,7 @@ public class N17626_Solution {
 				}
 			}
 		}
-		System.out.println(Arrays.toString(lagrange));
+//		System.out.println(Arrays.toString(lagrange));
 		System.out.println(lagrange[N]);
 	}
 }
