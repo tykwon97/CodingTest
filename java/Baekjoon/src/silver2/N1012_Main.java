@@ -28,6 +28,7 @@ public class N1012_Main {
 				st = new StringTokenizer(in.readLine(), " ");
 				int y = Integer.parseInt(st.nextToken());
 				int x = Integer.parseInt(st.nextToken());
+<<<<<<< HEAD
 				map[x][y] = true; // 배추 있는 자리 표시
 			}
 
@@ -48,21 +49,48 @@ public class N1012_Main {
 				for (int y = 0; y < M; y++) {
 					if(map[x][y]) { //배추가 있을때
 						for (int l = 0; l < 4; l++) {
+=======
+				map[x][y] = true; // 배추 표시
+			}
+
+			root = new int[N][M]; //초기화 작업
+			for (int x = 0; x < N; x++) {
+				for (int y = 0; y < M; y++) {
+					if(map[x][y]) // 배추있는 곳만 초기화
+						root[x][y] = x*M+y;
+					else
+						root[x][y] = N*M;
+				}
+			}
+
+			int[] dx = {1,0,0,-1};
+			int[] dy = {0,1,-1,0};
+			for (int x = 0; x < N; x++) {
+				for (int y = 0; y < M; y++) {
+					if(map[x][y]) { // 배추일때 (x,y)기준으로 4방탐색
+						for (int l = 0; l < 4; l++) { 
+>>>>>>> bc81e5d4eea65c829b1d3967109350b270c9e36d
 							int newX = x+dx[l];
 							int newY = y+dy[l];
-							if(newX<0 || newY<0 || newX>=N || newY>=M)
+							if(newX<0 || newY<0 || newX>=N || newY>=M) //범위 벗어난 경우
 								continue;
+<<<<<<< HEAD
 							if(map[newX][newY]) { // 배추가 있을때
 								make_set(x,y,newX,newY); //union-find
+=======
+							if(map[newX][newY]) { //탐색된 지역에 배추가 있는 경우 Union-Find
+								make_set(x,y,newX,newY);
+>>>>>>> bc81e5d4eea65c829b1d3967109350b270c9e36d
 							}
 						}
 					}
 				}
 			}
 
-			HashSet<Integer> set = new HashSet<>();
+			HashSet<Integer> set = new HashSet<>(); // Union-Find 개수 구하기
 			for (int x = 0; x < N; x++) {
 				for (int y = 0; y < M; y++) {
+<<<<<<< HEAD
 					set.add(root[x][y]);
 				}
 			}
@@ -73,6 +101,19 @@ public class N1012_Main {
 				sb.append(size+1).append("\n");
 			else
 				sb.append(size).append("\n");
+=======
+					if(map[x][y]) { //배추 있는 부분만
+						int rootValue = find(x,y); // 루트 노드 찾기
+						int rootX = rootValue/M;
+						int rootY = rootValue%M;
+						set.add(root[rootX][rootY]);
+					}
+				}
+			}
+
+			int size = set.size();
+			sb.append(size).append("\n");
+>>>>>>> bc81e5d4eea65c829b1d3967109350b270c9e36d
 		}
 
 		System.out.println(sb);
@@ -82,6 +123,7 @@ public class N1012_Main {
 	private static void make_set(int x1, int y1, int x2, int y2) {
 		int parent1 = find(x1,y1);
 		int parent2 = find(x2,y2);
+<<<<<<< HEAD
 
 		if(parent1 == parent2) {
 			return;
@@ -93,6 +135,14 @@ public class N1012_Main {
 				root[parent2/M][parent2%M] = parent1;
 				find(x2,y2);
 			}
+=======
+		
+		if(parent1 == parent2) {
+			return;
+		}else {
+			root[parent1/M][parent1%M] = parent2; // 루트 노드만 변경
+			find(x1,y1); // 루트 노드부터 차례대로 변경해주기
+>>>>>>> bc81e5d4eea65c829b1d3967109350b270c9e36d
 		}
 	}
 
@@ -106,4 +156,8 @@ public class N1012_Main {
 			return root[x][y] = find(nextX,nextY);
 		}
 	} 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> bc81e5d4eea65c829b1d3967109350b270c9e36d
