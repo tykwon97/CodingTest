@@ -65,7 +65,7 @@ public class N2931_Main {
 		boolean[][] isSelected = new boolean[R][C];
 		isSelected[startX][startY] = true; // 이중 방문 예방
 
-		int[] dx = {+1,+0,-1,+0};
+		int[] dx = {-1,+0,+1,+0};
 		int[] dy = {+0,+1,+0,-1};
 
 		//출발 위치에서 갈 수 있는 곳
@@ -74,7 +74,7 @@ public class N2931_Main {
 			int ny = startY+dy[i];
 			if(nx<0 || ny<0 || nx>=R || ny>=C) //범위를 벗어난 경우
 				continue;
-			if(map[nx][ny] == '.') //통로가 없는 경우
+			if(map[nx][ny] == 'M' || map[nx][ny] == 'Z') //통로가 없는 경우
 				continue;
 			//			System.out.println("nx : "+nx+" ny : "+ny);
 			queue.add(new int[] {nx,ny,startX,startY});
@@ -89,10 +89,11 @@ public class N2931_Main {
 			//			System.out.println("x : "+x +" y : "+y);
 			if(isSelected[x][y]) //이미 방문한 경우
 				continue;
-			isSelected[x][y] = true;
+			if(map[x][y] != '+')
+				isSelected[x][y] = true;
 
 			char op = map[x][y];
-			System.out.println(" x: "+x +" y: "+y+"  prevx : "+prevx+" prevy : "+prevy);
+//			System.out.println(" x: "+x +" y: "+y+"  prevx : "+prevx+" prevy : "+prevy);
 			switch (op+"") {
 			case ".":
 				map[x][y] = '#'; //방문 처리
@@ -120,56 +121,72 @@ public class N2931_Main {
 					queue.add(new int[] {x,y-1,x,y});
 				break;
 			case "1":
-				if(prevy == y+1 && x+1<R && y>=0)
+				if(prevy == y+1 && x+1<R)
 					queue.add(new int[] {x+1,y,x,y});
-				if(prevx == x+1 && x>=0 && y+1<C) 
+				if(prevx == x+1 && y+1<C) 
 					queue.add(new int[] {x,y+1,x,y});
 				break;
 			case "3":
 				//				System.out.println("prevx : "+prevx+" prevy : "+prevy +" x: "+x +" y: "+y);
-				if(prevy == y-1 && x+1<R && y>=0)
-					queue.add(new int[] {x+1,y,x,y});
-				if(prevx == x-1 && x>=0 && y+1<C)
-					queue.add(new int[] {x,y+1,x,y});
+				if(prevy == y-1 && x-1>=0 )
+					queue.add(new int[] {x-1,y,x,y});
+				if(prevx == x-1 && y-1>=0)
+					queue.add(new int[] {x,y-1,x,y});
 				break;
 			case "2":
-				if(prevx == x-1 && x<R && y+1<C)
+				if(prevx == x-1 && y+1<C)
 					queue.add(new int[] {x,y+1,x,y});
-				if(prevy == y-1 && x-1>=0 && y>=0)
+				if(prevy == y+1 && x-1>=0) 
 					queue.add(new int[] {x-1,y,x,y});
 				break;
 			case "4":
-				if(prevy == y+1 && x+1<R && y<C)
+				if(prevy == y-1 && x+1<R)
 					queue.add(new int[] {x+1,y,x,y});
-				if(prevx == x+1 && x>=0 && y-1>=0)
+				if(prevx == x+1  && y-1>=0)
 					queue.add(new int[] {x,y-1,x,y});
 				break;
 			default: // 출발지에서 방문한 지역 중 도착지에서도 방문한 경우 ('#')
 				// 지워진 위치 저장
 				roadX = x;
 				roadY = y;
-				System.out.println("x : "+x+" y : "+y);
-				System.out.println();
-				for (int i = 0; i < R; i++) {
-					for (int j = 0; j < C; j++) {
-						System.out.print(map[i][j]+" ");
-					}System.out.println();
-				}
+//				System.out.println("x : "+x+" y : "+y);
+//				System.out.println();
+//				for (int i = 0; i < R; i++) {
+//					for (int j = 0; j < C; j++) {
+//						System.out.print(map[i][j]+" ");
+//					}System.out.println();
+//				}
 				// 통로가 연결될 위치 확인
 				boolean[] spotCheck = new boolean[4]; //위 오 아 왼
+				boolean[] roadCheck = new boolean[4]; //위 오 아 왼
 
 				for (int i = 0; i < 4; i++) {
 					int nx = x+dx[i];
 					int ny = y+dy[i];
 					if(nx<0 || ny<0 || nx>=R || ny>=C)
 						continue;
-					if((map[nx][ny]=='#') || (map[nx][ny]=='.')) { // 통로가 아닌 경우
+					if((map[nx][ny]=='#') || (map[nx][ny]=='.'))  // 통로가 아닌 경우
+						continue;
+					if((map[nx][ny]=='M') || (map[nx][ny]=='Z')) {
+						roadCheck[i] = true;
+						continue;
+					}
+					if(i==0 && (map[nx][ny]=='-' || map[nx][ny]=='2' || map[nx][ny]=='3')) {
+						continue;
+					}else if(i==1 && (map[nx][ny]=='|' || map[nx][ny]=='1' || map[nx][ny]=='2')) {
+						continue;
+					}else if(i==2 && (map[nx][ny]=='-' || map[nx][ny]=='1' || map[nx][ny]=='4')) {
+						continue;
+					}else if(i==3 && (map[nx][ny]=='|' || map[nx][ny]=='3' || map[nx][ny]=='4')) {
 						continue;
 					}
 					spotCheck[i] = true; // 연결 할 통로가 있는 경우
 				}
+//				System.out.println(Arrays.toString(spotCheck));
 				// 알맞은 통로 찾기
-				if(spotCheck[0] && spotCheck[1])
+				if(spotCheck[0] && spotCheck[1] && spotCheck[2] && spotCheck[3])
+					operation = "+";
+				else if(spotCheck[0] && spotCheck[1])
 					operation = "2";
 				else if(spotCheck[0] && spotCheck[2])
 					operation = "|";
@@ -181,18 +198,32 @@ public class N2931_Main {
 					operation = "-";
 				else if(spotCheck[2] && spotCheck[3])
 					operation = "4";
-
+				else {
+					for (int i = 0; i < 4; i++) {
+						roadCheck[i] = roadCheck[i] || spotCheck[i];
+					}
+					if(roadCheck[0] && roadCheck[1])
+						operation = "2";
+					else if(roadCheck[0] && roadCheck[2])
+						operation = "|";
+					else if(roadCheck[0] && roadCheck[3])
+						operation = "3";
+					else if(roadCheck[1] && roadCheck[2])
+						operation = "1";
+					else if(roadCheck[1] && roadCheck[3])
+						operation = "-";
+					else if(roadCheck[2] && roadCheck[3])
+						operation = "4";
+				}
 				return;
 			}
 		}
 
-		System.out.println();
-		for (int i = 0; i < R; i++) {
-			for (int j = 0; j < C; j++) {
-				System.out.print(map[i][j]+" ");
-			}System.out.println();
-		}
-
-
+//		System.out.println();
+//		for (int i = 0; i < R; i++) {
+//			for (int j = 0; j < C; j++) {
+//				System.out.print(map[i][j]+" ");
+//			}System.out.println();
+//		}
 	}
 }
