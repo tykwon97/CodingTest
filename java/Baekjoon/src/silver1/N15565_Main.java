@@ -3,7 +3,7 @@ package silver1;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
+import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
@@ -18,44 +18,38 @@ public class N15565_Main {
 
 		int result = N+1;
 		
-		int cnt = 0; 
-		int temp = 0; // k개까지의 총합
+		int cnt = 0; // 1부터 다음 1까지의 사이즈
+		int temp = 0; // 1을 k가 포함하는 경우의 사이즈
 		
-		Queue<Integer> queue = new LinkedList<Integer>();
+		Queue<Integer> queue = new ArrayDeque<Integer>();
 		
 		st = new StringTokenizer(in.readLine(), " ");
 		for (int i = 0; i < N; i++) {
 			int x = Integer.parseInt(st.nextToken());
-//			System.out.println(" i : "+i + " K : "+K);
+
+			cnt++;
+			
 			if(x==1) {
-				cnt++;
-				
 				queue.add(cnt);
 				
 				temp += cnt;
 
+				K--;
+				
 				if(K<=0) {
 					temp -= queue.poll();
-//					System.out.println("temp : "+temp);
 					
 					if(result > temp)
 						result = temp;
-					
-				}else {
-					K--;
 				}
-				cnt = 0;				
 				
-			}else {
-				cnt++;				
+				cnt = 0;				
 			}
-					System.out.println("K : "+K);
 		}
 		
-		System.out.println((K<=1)?result+1:"-1");
+		System.out.println((K<=0)?result+1:"-1");
 	}
 }
-
 
 
 
