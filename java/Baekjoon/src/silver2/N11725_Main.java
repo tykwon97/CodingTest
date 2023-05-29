@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayDeque;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -16,39 +17,45 @@ public class N11725_Main {
 		StringTokenizer st;
 		
 		int N = Integer.parseInt(in.readLine());
-
-		List<List<Integer>> list = new LinkedList<>();
-		for (int i = 0; i <= N; i++) {
-			List<Integer> newList = new LinkedList<>();
-			list.add(newList);
-		}
+		
+		int[] result = new int[N+1];
+		
+		HashMap<Integer, String> map = new HashMap<>();
+		
 		for (int i = 0; i < N-1; i++) {
 			st = new StringTokenizer(in.readLine()," ");
 			int n1 = Integer.parseInt(st.nextToken());
 			int n2 = Integer.parseInt(st.nextToken());
-			list.get(n1).add(n2);
-			list.get(n2).add(n1);
+			if(map.get(n1) == null) {
+				map.put(n1, n2+"");
+			}else {
+				String prev = map.get(n1);
+				map.put(n1, prev+" "+n2);
+			}
+			if(map.get(n2) == null) {
+				map.put(n2, n1+"");
+			}else {
+				String prev = map.get(n2);
+				map.put(n2, prev+" "+n1);
+			}
 		}
 		
-		int[] result = new int[N+1];
-		boolean[] isSelected = new boolean[N+1];
-		
-		// BFS
-		Queue<Integer> queue = new ArrayDeque<Integer>();
-		queue.add(1);
+		Queue<int[]> queue = new ArrayDeque<>();
+		queue.add(new int[] {1});
 		while(!queue.isEmpty()) {
-			int index = queue.poll();
-			if(isSelected[index])
+			int[] arr = queue.poll();
+			int root = arr[0];
+//			System.out.println("root : "+root);
+			if(map.get(root) == null)
 				continue;
-			isSelected[index] = true;
-			List<Integer> newList = list.get(index);
-			for (int i = 0; i < newList.size(); i++) {
-				int newIndex = newList.get(i);
-				if(!isSelected[newIndex]) {
-					result[newIndex] = index;
-					queue.add(newIndex);					
+			st = new StringTokenizer(map.get(root), " ");
+			while(st.countTokens()>0){
+				int child = Integer.parseInt(st.nextToken());
+//				System.out.println("child :"+child);
+				if(result[child] == 0) {
+					result[child] = root;
+					queue.add(new int[] {child});
 				}
-				
 			}
 		}
 		
@@ -57,5 +64,7 @@ public class N11725_Main {
 		}
 		System.out.println(sb);
 	}
+
+
 
 }
