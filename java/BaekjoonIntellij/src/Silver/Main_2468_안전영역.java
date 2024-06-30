@@ -57,7 +57,7 @@ public class Main_2468_안전영역 {
 
             for (int i = 1; i <= n; i++) {
                 for (int j = 1; j <= n; j++) {
-                    if (map[i]g[j] > rain && !isVisited[i][j]) {
+                    if (map[i][j] > rain && !isVisited[i][j]) {
                         isSafe(rain, i, j);
                         safeSpot++;
                     }
